@@ -1,11 +1,16 @@
-from extractors.wwr import extract_wwr_jobs
-from extractors.indeed import extract_indeed_jobs
-from file import save_to_file
+from flask import Flask, render_template
 
-keyword = input("검색어를 입력하세요: ")
+app = Flask("ChanScrapper")
 
-wwr_jobs = extract_wwr_jobs(keyword)
-indeed_jobs = extract_indeed_jobs(keyword)
-jobs = wwr_jobs + indeed_jobs
 
-save_to_file(keyword, jobs)
+@app.route("/")
+def home():
+    return render_template("index.html", name="changeon", title="ChanScrapper")
+
+
+@app.route("/hello")
+def hello():
+    return "Hello World!"
+
+
+app.run(host="0.0.0.0", port=3001)

@@ -8,6 +8,11 @@ indeed_jobs = extract_indeed_jobs(keyword)
 
 total_jobs = wwr_jobs + indeed_jobs
 
+file = open(f"{keyword}.csv", "w", encoding="utf-8")
+
+file.write("Position,Company,Location,URL\n")
+
 for job in total_jobs:
-    print(job)
-    print("////\n//////")
+    file.write(f"{job['position']},{job['company']},{job['location']},{job['link']}\n")
+
+file.close()

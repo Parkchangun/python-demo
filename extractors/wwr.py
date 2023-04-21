@@ -28,10 +28,14 @@ def extract_wwr_jobs(keyword):
 
                 title = anchor.find("span", class_="title")
 
+                print(region)
+
                 job_data = {
                     "link": f"{wework_url}{link}",
                     "company": company.string.replace(",", " "),
-                    "location": region.string.replace(",", " "),
+                    "location": region.string.replace(",", " ")
+                    if region and region.string
+                    else "",
                     "position": title.string.replace(",", " "),
                 }
                 results.append(job_data)

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from extractors.indeed import extract_indeed_jobs
 from extractors.wwr import extract_wwr_jobs
 
@@ -15,6 +15,9 @@ def home():
 @app.route("/search")
 def search():
     keyword = request.args.get("keyword")
+
+    if keyword == None:
+        return redirect("/")
 
     if keyword in db:
         jobs = db[keyword]
